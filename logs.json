@@ -1,0 +1,66 @@
+[
+    {
+        "timestamp": "2026-02-06T10:14:02Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "INFO",
+        "message": "Service started successfully",
+        "version": "v2.4.1",
+        "trace_id": "a1f3c9"
+    },
+    {
+        "timestamp": "2026-02-06T10:18:47Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "WARN",
+        "message": "Memory usage exceeded 75% threshold",
+        "heap_used_mb": 6144,
+        "heap_max_mb": 8192,
+        "trace_id": "b7e22a"
+    },
+    {
+        "timestamp": "2026-02-06T10:22:11Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "ERROR",
+        "message": "OutOfMemoryError: Java heap space",
+        "exception": {
+            "type": "OutOfMemoryError",
+            "module": "ReportAggregationEngine",
+            "stack_trace": [
+                "ReportAggregationEngine.mergeReports(ReportAggregationEngine.java:214)",
+                "ClinicalJobRunner.run(ClinicalJobRunner.java:89)",
+                "ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)"
+            ]
+        },
+        "trace_id": "c3d98f"
+    },
+    {
+        "timestamp": "2026-02-06T10:22:15Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "ERROR",
+        "message": "Failed to generate clinical report",
+        "patient_batch_id": "PB-78421",
+        "error_code": "CRITICAL_REPORT_FAILURE",
+        "trace_id": "c3d98f"
+    },
+    {
+        "timestamp": "2026-02-06T10:24:32Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "WARN",
+        "message": "Retry attempt failed due to insufficient memory",
+        "retry_count": 3,
+        "trace_id": "d9aa01"
+    },
+    {
+        "timestamp": "2026-02-06T10:26:50Z",
+        "service": "clinical-analytics-service",
+        "environment": "prod",
+        "log_level": "ERROR",
+        "message": "Service degraded – entering fail-safe mode",
+        "fail_safe": true,
+        "trace_id": "e21ff0"
+    }
+]
