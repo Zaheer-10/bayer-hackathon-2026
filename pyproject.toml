@@ -16,16 +16,12 @@ loguru = "0.7.2"
 httpx = "0.28.0"
 openai = "1.109.1"
 aiofiles = "24.1.0"
-langchain-aws = "0.2.35"
 langchain-openai = "0.3.35"
 langchain = "0.3.27"
 langchain-core = "0.3.78"
 langchain-community = "0.3.30"
 pandas = "2.3.2"
 python-multipart = "0.0.20"
-faiss-cpu = "^1.13.2"
-sentence-transformers = "^5.2.2"
-streamlit = "^1.40.0"
 
 [build-system]
 requires = ["poetry-core"]
