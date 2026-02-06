@@ -105,16 +105,16 @@ def generate_logs(num_logs=20):
     # Use the repo's artifacts directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.dirname(os.path.dirname(script_dir))
-    artifacts_dir = os.path.join(repo_root, "artifacts")
-    output_file = os.path.join(artifacts_dir, "dummy_logs.json")
+    data_dir = os.path.join(repo_root, "data")
+    output_file = os.path.join(data_dir, "dummy_logs.json")
     
     # Ensure directory exists
-    if not os.path.exists(artifacts_dir):
+    if not os.path.exists(data_dir):
         try:
-            os.makedirs(artifacts_dir)
-            print(f"Created directory: {artifacts_dir}")
+            os.makedirs(data_dir)
+            print(f"Created directory: {data_dir}")
         except Exception as e:
-            print(f"Error creating directory {artifacts_dir}: {e}")
+            print(f"Error creating directory {data_dir}: {e}")
             output_file = "dummy_logs.json"
 
     with open(output_file, 'w') as f:
