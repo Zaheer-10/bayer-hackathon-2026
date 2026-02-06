@@ -7,6 +7,8 @@ import re
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
 
+from agents.logs_agent import LogAgent
+
 # Deployment within this many minutes of first error -> high confidence
 DEPLOY_WINDOW_MINUTES = 30
 HIGH_CONFIDENCE = 0.9
@@ -91,3 +93,88 @@ def evaluate_causal_rules(
         return 0.5, None, "Investigate further: DB/timeout errors found but no recent DB-related deployment."
 
     return LOW_CONFIDENCE, None, "Investigate further: no clear cause."
+
+
+def analyze_logs_advanced(
+    logs: list[dict[str, Any]],
+    trigger_time: Optional[str] = None
+) -> dict[str, Any]:
+    """
+    Advanced log analysis using LogAgent.
+    
+    Performs deep analysis including:
+    - Severity classification (critical, high, medium, info)
+    - Log type categorization (feature, bugfix, maintenance, etc.)
+    - Keyword extraction and pattern detection
+    - Author and version tracking
+    
+    Args:
+        logs: List of log entries (can be from logs.json or demo_logs.json format)
+        trigger_time: Optional trigger time for temporal correlation
+        
+    Returns:
+        Dictionary containing:
+        - summary: Statistical summary of logs
+        - critical_logs: List of critical severity entries
+        - high_logs: List of high severity entries
+        - insights: Key findings and patterns
+    """
+    if not logs:
+        return {
+            "summary": {"total_logs": 0, "message": "No logs to analyze"},
+            "critical_logs": [],
+            "high_logs": [],
+            "insights": ["No logs available for analysis"]
+        }
+    
+    # Initialize LogAgent and process logs
+    agent = LogAgent()
+    agent.process_multiple_logs(logs)
+    
+    # Get summary
+    summary = agent.get_summary()
+    
+    # Filter critical and high severity logs
+    critical_logs = agent.filter_by_severity("critical")
+    high_logs = agent.filter_by_severity("high")
+    
+    # Extract insights
+    insights = []
+    
+    # Severity insights
+    severities = summary.get("severities", {})
+    critical_count = severities.get("critical", 0)
+    high_count = severities.get("high", 0)
+    
+    if critical_count > 0:
+        insights.append(f"[CRITICAL] {critical_count} CRITICAL severity log(s) detected")
+    if high_count > 0:
+        insights.append(f"[WARNING] {high_count} HIGH severity log(s) detected")
+    
+    # Log type insights
+    log_types = summary.get("log_types", {})
+    bugfix_count = log_types.get("bugfix", 0)
+    if bugfix_count > 0:
+        insights.append(f"Found {bugfix_count} bugfix-related log(s)")
+    
+    # Check for security/vulnerability keywords in critical logs
+    security_keywords = ["security", "vulnerability", "breach", "scan"]
+    for log in critical_logs:
+        msg = log["original"].get("message", "").lower()
+        details = log["original"].get("details", "").lower()
+        if any(kw in msg or kw in details for kw in security_keywords):
+            insights.append("Security-related critical logs found - immediate attention required")
+            break
+    
+    # Author analysis for deployment correlation
+    authors = summary.get("authors", {})
+    if len(authors) > 1:
+        insights.append(f"Logs from {len(authors)} different authors/teams")
+    
+    return {
+        "summary": summary,
+        "critical_logs": [log["original"] for log in critical_logs],
+        "high_logs": [log["original"] for log in high_logs],
+        "insights": insights,
+        "total_critical_high": critical_count + high_count
+    }

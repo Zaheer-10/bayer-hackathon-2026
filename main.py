@@ -38,6 +38,7 @@ def _state_to_dict(s: IncidentState | None) -> dict | None:
         "metrics_result": s.metrics_result,
         "logs_result": s.logs_result,
         "deploy_result": s.deploy_result,
+        "log_analysis": s.log_analysis,
         "confidence_score": s.confidence_score,
         "root_cause": s.root_cause,
         "recommendation": s.recommendation,
