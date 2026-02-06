@@ -103,8 +103,9 @@ def generate_logs(num_logs=20):
         logs.append(log_entry)
     
     # Use the repo's artifacts directory
+    # Use the repo's data directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.dirname(os.path.dirname(script_dir))
+    repo_root = os.path.dirname(script_dir) # Go up one level from agents/ to repo root
     data_dir = os.path.join(repo_root, "data")
     output_file = os.path.join(data_dir, "dummy_logs.json")
     

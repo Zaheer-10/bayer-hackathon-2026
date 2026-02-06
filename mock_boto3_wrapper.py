@@ -46,7 +46,16 @@ def _load_mock_data():
     try:
         with open(path, "r", encoding="utf-8") as f:
             raw = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+            # If raw is a list (original logs.json format), wrap it
+            if isinstance(raw, list):
+                return {
+                    "git_history": raw,
+                    "commit_details": {c.get("commit_hash", ""): c.get("details", "") for c in raw},
+                    "config": {"memory_mb": 512}
+                }
+            # Otherwise assume it's the structured format
+            return raw
+    except (FileNotFoundError, json.JSONDecodeError, TypeError):
         return {"git_history": [], "commit_details": {}, "config": {"memory_mb": 512}}
     # demo_logs format: commit_hash, version_tag, message, author, timestamp, details
     all_entries = []

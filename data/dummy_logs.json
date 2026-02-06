@@ -1,0 +1,402 @@
+[
+  {
+    "commit_hash": "q1p217u",
+    "timestamp": "2026-02-06T03:41:24Z",
+    "author": "backend-guru",
+    "version_tag": "v2.4.1",
+    "message": "fix(core): memory leak in background worker",
+    "details": "Identified and fixed circular reference in task scheduler causing gradual memory increase over 24h."
+  },
+  {
+    "commit_hash": "1u2w202",
+    "timestamp": "2026-02-06T10:10:12Z",
+    "author": "sre-lead",
+    "version_tag": "v2.4.1",
+    "message": "fix(cache): race condition in cache invalidation",
+    "details": "Fixed race condition causing stale data to be served. Added proper locking mechanism."
+  },
+  {
+    "commit_hash": "xc5tt16",
+    "timestamp": "2026-02-05T22:19:07Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.4.1",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "nx64l2i",
+    "timestamp": "2026-02-05T11:30:50Z",
+    "author": "devops-master",
+    "version_tag": "v2.4.1",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "apz2ifb",
+    "timestamp": "2026-02-05T03:15:23Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.4.1",
+    "message": "fix(db): deadlock in transaction processing",
+    "details": "Resolved database deadlock caused by improper lock ordering in concurrent transactions."
+  },
+  {
+    "commit_hash": "0dtyay1",
+    "timestamp": "2026-02-05T10:39:16Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.4.0",
+    "message": "perf(db): add index to created_at column",
+    "details": "Significantly improved query performance for time-series data retrieval. Reduced latency by 40%."
+  },
+  {
+    "commit_hash": "39dqo50",
+    "timestamp": "2026-02-04T09:36:48Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.4.0",
+    "message": "perf(cache): implement Redis caching layer",
+    "details": "Added distributed cache for frequently accessed data. Reduced database load by 60%."
+  },
+  {
+    "commit_hash": "brmtkrh",
+    "timestamp": "2026-02-03T17:18:45Z",
+    "author": "devops-master",
+    "version_tag": "v2.4.0",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "b3ukv3c",
+    "timestamp": "2026-02-04T09:38:15Z",
+    "author": "frontend-ninja",
+    "version_tag": "v2.4.0",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "0xcyasy",
+    "timestamp": "2026-02-02T19:17:17Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.4.0",
+    "message": "fix(cache): race condition in cache invalidation",
+    "details": "Fixed race condition causing stale data to be served. Added proper locking mechanism."
+  },
+  {
+    "commit_hash": "lhdga7e",
+    "timestamp": "2026-02-03T05:32:09Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.9",
+    "message": "fix(network): connection pool exhaustion",
+    "details": "Resolved connection leak in HTTP client. Properly closing connections after use."
+  },
+  {
+    "commit_hash": "4yrjc2j",
+    "timestamp": "2026-02-03T02:23:14Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.9",
+    "message": "feat(analytics): refactor ReportAggregationEngine for parallel processing",
+    "details": "Moved from single-threaded to ThreadPoolExecutor to handle larger patient batches. Optimized heap allocation for PB-78421 series."
+  },
+  {
+    "commit_hash": "6pj9r00",
+    "timestamp": "2026-02-01T19:34:16Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.9",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "dketr5f",
+    "timestamp": "2026-02-01T16:03:18Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.9",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "thjw481",
+    "timestamp": "2026-02-02T08:16:21Z",
+    "author": "frontend-ninja",
+    "version_tag": "v2.3.9",
+    "message": "chore: update CI/CD pipeline configuration",
+    "details": "Optimized build times by parallelizing test execution."
+  },
+  {
+    "commit_hash": "4lh3s7x",
+    "timestamp": "2026-01-31T15:10:03Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.8",
+    "message": "fix(network): connection pool exhaustion",
+    "details": "Resolved connection leak in HTTP client. Properly closing connections after use."
+  },
+  {
+    "commit_hash": "tud2qn1",
+    "timestamp": "2026-01-31T18:28:51Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.8",
+    "message": "chore: update base docker image to java-17-slim",
+    "details": "Routine security patch for the base runtime environment."
+  },
+  {
+    "commit_hash": "kptzt9k",
+    "timestamp": "2026-02-01T10:15:14Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.8",
+    "message": "chore: refactor test utilities",
+    "details": "Consolidated test helper functions into shared module for better reusability."
+  },
+  {
+    "commit_hash": "7nvrx6v",
+    "timestamp": "2026-01-31T05:22:14Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.8",
+    "message": "bug(parser): incorrect handling of edge cases",
+    "details": "Fixed parser crash on malformed input. Added validation and error handling."
+  },
+  {
+    "commit_hash": "ufvhlfu",
+    "timestamp": "2026-01-30T19:01:17Z",
+    "author": "sre-lead",
+    "version_tag": "v2.3.8",
+    "message": "feat(api): add pagination to list endpoints",
+    "details": "Added cursor-based pagination for better performance on large datasets."
+  },
+  {
+    "commit_hash": "npvapub",
+    "timestamp": "2026-01-30T19:16:56Z",
+    "author": "data-engineer",
+    "version_tag": "v2.3.7",
+    "message": "bug(ui): fix navigation bar alignment on mobile",
+    "details": "Corrected CSS flexbox layout issues causing overlap on screens smaller than 768px."
+  },
+  {
+    "commit_hash": "353rf3v",
+    "timestamp": "2026-01-29T20:46:09Z",
+    "author": "sre-lead",
+    "version_tag": "v2.3.7",
+    "message": "feat(ui): add dark mode support",
+    "details": "Implemented system-wide dark mode with user preference persistence. Updated all components."
+  },
+  {
+    "commit_hash": "0c0mr23",
+    "timestamp": "2026-01-29T16:25:15Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.7",
+    "message": "perf(query): optimize N+1 query problem",
+    "details": "Implemented eager loading for related entities. Reduced query count from 1000+ to 10."
+  },
+  {
+    "commit_hash": "jc8zim2",
+    "timestamp": "2026-01-30T07:56:36Z",
+    "author": "data-engineer",
+    "version_tag": "v2.3.7",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "pu09kmj",
+    "timestamp": "2026-01-28T21:24:39Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.7",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "imxbdhh",
+    "timestamp": "2026-01-28T22:54:10Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.6",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "sdoit7f",
+    "timestamp": "2026-01-28T23:07:57Z",
+    "author": "frontend-ninja",
+    "version_tag": "v2.3.6",
+    "message": "fix(db): deadlock in transaction processing",
+    "details": "Resolved database deadlock caused by improper lock ordering in concurrent transactions."
+  },
+  {
+    "commit_hash": "33qp8tc",
+    "timestamp": "2026-01-28T02:09:27Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.6",
+    "message": "bug(parser): incorrect handling of edge cases",
+    "details": "Fixed parser crash on malformed input. Added validation and error handling."
+  },
+  {
+    "commit_hash": "8eqqp3q",
+    "timestamp": "2026-01-28T11:43:05Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.6",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "4pj20he",
+    "timestamp": "2026-01-27T14:14:58Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.6",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "ma5gxk4",
+    "timestamp": "2026-01-27T10:31:38Z",
+    "author": "sre-lead",
+    "version_tag": "v2.3.5",
+    "message": "fix(network): connection pool exhaustion",
+    "details": "Resolved connection leak in HTTP client. Properly closing connections after use."
+  },
+  {
+    "commit_hash": "1m9i6va",
+    "timestamp": "2026-01-27T10:20:40Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.5",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "hykos6f",
+    "timestamp": "2026-01-27T11:19:23Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.5",
+    "message": "bug(ui): fix navigation bar alignment on mobile",
+    "details": "Corrected CSS flexbox layout issues causing overlap on screens smaller than 768px."
+  },
+  {
+    "commit_hash": "mef5u3h",
+    "timestamp": "2026-01-25T14:45:33Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.5",
+    "message": "chore: bump dependency versions",
+    "details": "Updated all dependencies to latest stable versions. No breaking changes."
+  },
+  {
+    "commit_hash": "1dbbzd2",
+    "timestamp": "2026-01-25T22:42:27Z",
+    "author": "frontend-ninja",
+    "version_tag": "v2.3.5",
+    "message": "fix(auth): session timeout not being enforced",
+    "details": "Fixed bug where user sessions were not expiring correctly. Updated session middleware."
+  },
+  {
+    "commit_hash": "gg50gcl",
+    "timestamp": "2026-01-26T08:39:26Z",
+    "author": "data-engineer",
+    "version_tag": "v2.3.4",
+    "message": "fix(network): connection pool exhaustion",
+    "details": "Resolved connection leak in HTTP client. Properly closing connections after use."
+  },
+  {
+    "commit_hash": "sxo73je",
+    "timestamp": "2026-01-24T20:06:09Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.4",
+    "message": "fix(db): deadlock in transaction processing",
+    "details": "Resolved database deadlock caused by improper lock ordering in concurrent transactions."
+  },
+  {
+    "commit_hash": "at8h6kx",
+    "timestamp": "2026-01-24T13:20:59Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.4",
+    "message": "chore: update base docker image to java-17-slim",
+    "details": "Routine security patch for the base runtime environment."
+  },
+  {
+    "commit_hash": "md5aqwp",
+    "timestamp": "2026-01-25T07:51:48Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.4",
+    "message": "fix(api): NPE in user authentication flow",
+    "details": "Resolved NullPointerException when user profile data is incomplete. Added null checks in AuthController."
+  },
+  {
+    "commit_hash": "vel81it",
+    "timestamp": "2026-01-23T14:15:21Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.4",
+    "message": "bug(api): incorrect error codes returned",
+    "details": "Corrected HTTP status codes for validation failures. Changed from 500 to 400."
+  },
+  {
+    "commit_hash": "o7asm8a",
+    "timestamp": "2026-01-23T15:36:34Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.3",
+    "message": "fix(security): XSS vulnerability in user input",
+    "details": "Sanitized user input to prevent cross-site scripting attacks. Applied proper escaping."
+  },
+  {
+    "commit_hash": "r9bf3is",
+    "timestamp": "2026-01-24T06:27:51Z",
+    "author": "data-engineer",
+    "version_tag": "v2.3.3",
+    "message": "fix(db): deadlock in transaction processing",
+    "details": "Resolved database deadlock caused by improper lock ordering in concurrent transactions."
+  },
+  {
+    "commit_hash": "xw2pfso",
+    "timestamp": "2026-01-23T09:23:12Z",
+    "author": "data-engineer",
+    "version_tag": "v2.3.3",
+    "message": "fix(core): memory leak in background worker",
+    "details": "Identified and fixed circular reference in task scheduler causing gradual memory increase over 24h."
+  },
+  {
+    "commit_hash": "85a4scb",
+    "timestamp": "2026-01-23T03:14:13Z",
+    "author": "frontend-ninja",
+    "version_tag": "v2.3.3",
+    "message": "perf(cache): implement Redis caching layer",
+    "details": "Added distributed cache for frequently accessed data. Reduced database load by 60%."
+  },
+  {
+    "commit_hash": "ycbrlxf",
+    "timestamp": "2026-01-23T04:45:35Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.3",
+    "message": "fix(api): NPE in user authentication flow",
+    "details": "Resolved NullPointerException when user profile data is incomplete. Added null checks in AuthController."
+  },
+  {
+    "commit_hash": "kla5ui3",
+    "timestamp": "2026-01-22T04:41:42Z",
+    "author": "devops-master",
+    "version_tag": "v2.3.2",
+    "message": "fix(db): deadlock in transaction processing",
+    "details": "Resolved database deadlock caused by improper lock ordering in concurrent transactions."
+  },
+  {
+    "commit_hash": "roruwks",
+    "timestamp": "2026-01-21T17:33:38Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.2",
+    "message": "fix(auth): session timeout not being enforced",
+    "details": "Fixed bug where user sessions were not expiring correctly. Updated session middleware."
+  },
+  {
+    "commit_hash": "yb5qfrk",
+    "timestamp": "2026-01-21T16:11:38Z",
+    "author": "dev-team-alpha",
+    "version_tag": "v2.3.2",
+    "message": "fix(auth): session timeout not being enforced",
+    "details": "Fixed bug where user sessions were not expiring correctly. Updated session middleware."
+  },
+  {
+    "commit_hash": "oou9ju9",
+    "timestamp": "2026-01-20T16:26:24Z",
+    "author": "backend-guru",
+    "version_tag": "v2.3.2",
+    "message": "feat(ui): add dark mode support",
+    "details": "Implemented system-wide dark mode with user preference persistence. Updated all components."
+  },
+  {
+    "commit_hash": "bdfor2c",
+    "timestamp": "2026-01-20T22:13:28Z",
+    "author": "qa-specialist",
+    "version_tag": "v2.3.2",
+    "message": "bug(ui): fix navigation bar alignment on mobile",
+    "details": "Corrected CSS flexbox layout issues causing overlap on screens smaller than 768px."
+  }
+]
