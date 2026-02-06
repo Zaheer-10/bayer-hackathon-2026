@@ -1,0 +1,10 @@
+[
+  {"timestamp": "2026-02-06T09:55:00Z", "level": "INFO", "message": "Request completed successfully"},
+  {"timestamp": "2026-02-06T10:00:00Z", "level": "INFO", "message": "Health check passed"},
+  {"timestamp": "2026-02-06T10:05:00Z", "level": "INFO", "message": "DB connection pool: 20 active"},
+  {"timestamp": "2026-02-06T10:15:00Z", "level": "ERROR", "message": "ConnectionTimeout: Database connection pool exhausted after 5000ms"},
+  {"timestamp": "2026-02-06T10:15:00Z", "level": "ERROR", "message": "ConnectionTimeout: Unable to acquire connection from pool"},
+  {"timestamp": "2026-02-06T10:16:00Z", "level": "ERROR", "message": "ConnectionTimeout: Query timed out waiting for connection"},
+  {"timestamp": "2026-02-06T10:17:00Z", "level": "WARN", "message": "High latency detected: 2000ms p95"},
+  {"timestamp": "2026-02-06T10:20:00Z", "level": "ERROR", "message": "500 Internal Server Error - ConnectionTimeout"}
+]

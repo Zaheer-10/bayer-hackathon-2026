@@ -1,0 +1,6 @@
+[
+  {"timestamp": "2026-02-06T08:00:00Z", "id": "DEP-9918", "description": "Frontend bundle update v2.1.0"},
+  {"timestamp": "2026-02-06T09:00:00Z", "id": "DEP-9919", "description": "API rate limiter config change"},
+  {"timestamp": "2026-02-06T10:00:00Z", "id": "DEP-9921", "description": "DB pool size reduced from 50 to 10 - config change"},
+  {"timestamp": "2026-02-06T10:30:00Z", "id": "DEP-9922", "description": "Hotfix: revert DB pool config"}
+]

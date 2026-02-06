@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Incident Commander</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="layout">
+    <header class="header">
+      <h1>Autonomous Incident Commander</h1>
+      <div class="status-bar" id="statusBar">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Checking…</span>
+      </div>
+      <button type="button" class="btn btn-primary" id="simulateBtn">Simulate incident</button>
+    </header>
+
+    <main class="main">
+      <section class="dashboard" id="dashboard">
+        <h2>Dashboard</h2>
+        <div class="dashboard-card verdict-card" id="verdictCard">
+          <h3>Verdict</h3>
+          <p id="verdictText">Run an investigation to see the verdict.</p>
+        </div>
+        <div class="dashboard-card feed-card" id="feedCard">
+          <h3>Investigation feed</h3>
+          <ul id="feedList"></ul>
+        </div>
+        <div class="dashboard-card rca-card" id="rcaCard">
+          <h3>RCA Report</h3>
+          <div class="rca-content" id="rcaContent">
+            <p class="muted">No report yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chat-section">
+        <h2>Chat — Ask the Commander (LLM)</h2>
+        <p class="chat-hint">Ask to investigate, find root cause, or recommend an action. The LLM can run the investigation and act on it.</p>
+        <div class="chat-messages" id="chatMessages"></div>
+        <form class="chat-form" id="chatForm">
+          <input type="text" id="chatInput" placeholder="e.g. What caused the latency spike? Should we rollback?" autocomplete="off" />
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

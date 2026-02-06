@@ -1,0 +1,14 @@
+[
+  {"timestamp": "2026-02-06T09:30:00Z", "latency_ms": 180},
+  {"timestamp": "2026-02-06T09:35:00Z", "latency_ms": 195},
+  {"timestamp": "2026-02-06T09:40:00Z", "latency_ms": 210},
+  {"timestamp": "2026-02-06T09:45:00Z", "latency_ms": 190},
+  {"timestamp": "2026-02-06T09:50:00Z", "latency_ms": 205},
+  {"timestamp": "2026-02-06T09:55:00Z", "latency_ms": 200},
+  {"timestamp": "2026-02-06T10:00:00Z", "latency_ms": 198},
+  {"timestamp": "2026-02-06T10:05:00Z", "latency_ms": 220},
+  {"timestamp": "2026-02-06T10:10:00Z", "latency_ms": 185},
+  {"timestamp": "2026-02-06T10:15:00Z", "latency_ms": 2000},
+  {"timestamp": "2026-02-06T10:20:00Z", "latency_ms": 2100},
+  {"timestamp": "2026-02-06T10:25:00Z", "latency_ms": 2100}
+]
