@@ -40,6 +40,61 @@ def _template_report(state: IncidentState) -> str:
         lines.append("- Relevant log entries:")
         for log in (state.logs_result or [])[:5]:
             lines.append(f"  - [{log.get('timestamp')}] {log.get('level')}: {log.get('message', '')[:100]}")
+    
+    # Advanced Log Analysis Section
+    if state.log_analysis:
+        lines.extend([
+            "",
+            "## Advanced Log Analysis",
+        ])
+        
+        analysis = state.log_analysis
+        summary = analysis.get("summary", {})
+        
+        # Overall stats
+        lines.append(f"- **Total logs analyzed:** {summary.get('total_logs', 0)}")
+        
+        # Severity breakdown
+        severities = summary.get("severities", {})
+        if severities:
+            lines.append("- **Severity breakdown:**")
+            for severity, count in sorted(severities.items(), key=lambda x: x[1], reverse=True):
+                lines.append(f"  - {severity.upper()}: {count}")
+        
+        # Log types
+        log_types = summary.get("log_types", {})
+        if log_types:
+            lines.append("- **Log types:**")
+            for log_type, count in sorted(log_types.items(), key=lambda x: x[1], reverse=True):
+                lines.append(f"  - {log_type}: {count}")
+        
+        # Insights
+        insights = analysis.get("insights", [])
+        if insights:
+            lines.append("- **Key findings:**")
+            for insight in insights:
+                lines.append(f"  - {insight}")
+        
+        # Critical logs
+        critical_logs = analysis.get("critical_logs", [])
+        if critical_logs:
+            lines.extend(["", "### Critical Severity Logs"])
+            for log in critical_logs[:3]:  # Show top 3
+                lines.append(f"- **{log.get('message', 'N/A')}**")
+                if log.get('author'):
+                    lines.append(f"  - Author: {log.get('author')}")
+                if log.get('details'):
+                    lines.append(f"  - Details: {log.get('details')[:100]}")
+        
+        # High severity logs
+        high_logs = analysis.get("high_logs", [])
+        if high_logs and not critical_logs:  # Only show if no critical logs
+            lines.extend(["", "### High Severity Logs"])
+            for log in high_logs[:3]:
+                lines.append(f"- **{log.get('message', 'N/A')}**")
+                if log.get('details'):
+                    lines.append(f"  - Details: {log.get('details')[:100]}")
+    
     lines.extend([
         "",
         "## Evidence",

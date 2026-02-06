@@ -10,7 +10,7 @@ from typing import Any, Callable, Optional, TypedDict
 
 from pydantic import BaseModel, Field
 
-from agents.commander import evaluate_causal_rules
+from agents.commander import evaluate_causal_rules, analyze_logs_advanced
 from agents.deploy_agent import get_recent_deployments
 from agents.logs_agent import search_logs
 from agents.metrics_agent import get_metrics_delta
@@ -18,6 +18,7 @@ from agents.metrics_agent import get_metrics_delta
 # Default paths relative to project root
 DATA_DIR = Path(__file__).resolve().parent / "data"
 METRICS_PATH = DATA_DIR / "metrics.json"
+DEMO_LOGS_PATH = DATA_DIR / "demo_logs.json"
 LATENCY_THRESHOLD_MS = 2000
 POLL_INTERVAL_SEC = 5
 
@@ -32,6 +33,7 @@ class IncidentState(BaseModel):
     metrics_result: Optional[dict[str, Any]] = None
     logs_result: Optional[list[dict[str, Any]]] = None
     deploy_result: Optional[list[dict[str, Any]]] = None
+    log_analysis: Optional[dict[str, Any]] = None  # Advanced analysis from LogAgent
     confidence_score: Optional[float] = None
     root_cause: Optional[str] = None
     recommendation: Optional[str] = None
@@ -103,6 +105,7 @@ class GraphState(TypedDict, total=False):
     metrics_result: Optional[dict[str, Any]]
     logs_result: Optional[list[dict[str, Any]]]
     deploy_result: Optional[list[dict[str, Any]]]
+    log_analysis: Optional[dict[str, Any]]
     confidence_score: Optional[float]
     root_cause: Optional[str]
     recommendation: Optional[str]
@@ -119,12 +122,29 @@ def _gather_node(state: GraphState) -> dict[str, Any]:
     metrics_result = get_metrics_delta(incident_time=trigger_time)
     messages.append(f"Metrics Agent: Normal={metrics_result.get('normal_ms')}ms, Current={metrics_result.get('current_ms')}ms, Delta={metrics_result.get('delta_ms')}ms.")
 
+    # Basic log search (backward compatible)
     logs_result = search_logs(since_time=_minus_30_min(trigger_time), until_time=trigger_time)
     if logs_result:
         first_log = logs_result[0]
         messages.append(f"Logs Agent: Found {len(logs_result)} matching entries. First: {first_log.get('message', '')[:80]}...")
     else:
         messages.append("Logs Agent: No matching error keywords in window.")
+
+    # Advanced log analysis from demo_logs.json (deployment/commit logs)
+    log_analysis = None
+    try:
+        with open(DEMO_LOGS_PATH) as f:
+            demo_logs = json.load(f)
+        if demo_logs:
+            messages.append(f"Logs Agent: Analyzing {len(demo_logs)} deployment/commit logs with advanced classifier...")
+            log_analysis = analyze_logs_advanced(demo_logs, trigger_time)
+            
+            # Add insights to messages
+            if log_analysis and log_analysis.get("insights"):
+                for insight in log_analysis["insights"]:
+                    messages.append(f"Logs Agent Insight: {insight}")
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        messages.append(f"Logs Agent: Note - Could not load demo_logs.json: {e}")
 
     deploy_result = get_recent_deployments(before_time=trigger_time, n=3)
     if deploy_result:
@@ -138,6 +158,7 @@ def _gather_node(state: GraphState) -> dict[str, Any]:
         "metrics_result": metrics_result,
         "logs_result": logs_result,
         "deploy_result": deploy_result,
+        "log_analysis": log_analysis,
         "agent_messages": messages,
     }
 
@@ -196,6 +217,7 @@ def run_incident_pipeline(state: IncidentState) -> IncidentState:
     current["metrics_result"] = gather_out.get("metrics_result")
     current["logs_result"] = gather_out.get("logs_result")
     current["deploy_result"] = gather_out.get("deploy_result")
+    current["log_analysis"] = gather_out.get("log_analysis")
     current["agent_messages"] = (current.get("agent_messages") or []) + (gather_out.get("agent_messages") or [])
     # Reason
     reason_out = _reason_node(current)
@@ -209,6 +231,7 @@ def run_incident_pipeline(state: IncidentState) -> IncidentState:
     state.metrics_result = current.get("metrics_result")
     state.logs_result = current.get("logs_result")
     state.deploy_result = current.get("deploy_result")
+    state.log_analysis = current.get("log_analysis")
     state.confidence_score = current.get("confidence_score")
     state.root_cause = current.get("root_cause")
     state.recommendation = current.get("recommendation")
