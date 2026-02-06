@@ -29,20 +29,20 @@ def _get_boto3():
 # =============================================================================
 USE_REAL_AWS = os.environ.get("USE_REAL_AWS", "0").strip().lower() in ("1", "true", "yes")
 
-# Artifacts folder only - no other sources
-ARTIFACTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "artifacts")
+# Use data folder for mock data
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 
-def _artifact_path(filename: str) -> str:
-    return os.path.join(ARTIFACTS_DIR, filename)
+def _data_path(filename: str) -> str:
+    return os.path.join(DATA_DIR, filename)
 
 
 # -----------------------------------------------------------------------------
 # Mock Data - Reads ONLY from artifacts folder (demo_logs.json, etc.)
 # -----------------------------------------------------------------------------
 def _load_mock_data():
-    """Load mock data from artifacts/demo_logs.json only."""
-    path = _artifact_path("demo_logs.json")
+    """Load mock data from data/demo_logs.json only."""
+    path = _data_path("demo_logs.json")
     try:
         with open(path, "r", encoding="utf-8") as f:
             raw = json.load(f)

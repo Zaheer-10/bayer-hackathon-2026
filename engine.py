@@ -11,7 +11,7 @@ from typing import Any, Callable, Optional, TypedDict
 from pydantic import BaseModel, Field
 
 from agents.commander import evaluate_causal_rules, analyze_logs_advanced
-from agents.deploy_agent import get_recent_deployments
+from agents.deploy_agent import get_recent_deployments, DeploymentAgent
 from agents.logs_agent import search_logs
 from agents.metrics_agent import get_metrics_delta
 
@@ -185,6 +185,7 @@ def _reason_node(state: GraphState) -> dict[str, Any]:
         state.get("logs_result"),
         state.get("deploy_result"),
         state.get("trigger_time"),
+        log_analysis=state.get("log_analysis"),
     )
     if root_cause:
         messages.append(f"Commander: Root cause identified: {root_cause}. Confidence={confidence:.0%}. {recommendation}")

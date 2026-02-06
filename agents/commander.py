@@ -33,9 +33,11 @@ def evaluate_causal_rules(
     logs_result: Optional[list[dict[str, Any]]],
     deploy_result: Optional[list[dict[str, Any]]],
     trigger_time: Optional[str],
+    log_analysis: Optional[dict[str, Any]] = None,
 ) -> tuple[float, Optional[str], Optional[str]]:
     """
     Apply causal rule: deployment within 30 min of first error + DB-related log + DB-related deploy -> rollback.
+    Also considers advanced log analysis for high severity issues.
 
     Returns (confidence_score, root_cause, recommendation).
     """
@@ -88,6 +90,26 @@ def evaluate_causal_rules(
     if deploy_in_window_with_db:
         deploy_id = deploy_in_window_with_db.get("id") or "Unknown"
         return 0.6, deploy_id, "Consider rollback; investigate logs for correlation."
+
+    # Check advanced log analysis for critical issues if basic rules failed
+    if log_analysis:
+        critical_logs = log_analysis.get("critical_logs", [])
+        if critical_logs:
+            # Use the most recent critical log as potential root cause indicator
+            top_critical = critical_logs[0]
+            msg = top_critical.get("message", "Unknown critical error")
+            commit = top_critical.get("commit_hash") or top_critical.get("commit")
+            auth = top_critical.get("author")
+            
+            cause_desc = f"Critical Log: {msg}"
+            if commit:
+                cause_desc += f" (Commit: {commit})"
+            
+            rec = "Investigate critical log entries immediately."
+            if auth:
+                rec += f" Contact {auth}."
+                
+            return 0.7, cause_desc, rec
 
     if has_db_timeout_log:
         return 0.5, None, "Investigate further: DB/timeout errors found but no recent DB-related deployment."

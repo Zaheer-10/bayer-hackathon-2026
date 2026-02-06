@@ -1,13 +1,13 @@
 import json
 import os
 
-# Artifacts folder only - no other sources
-ARTIFACTS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "artifacts")
+# Use data folder
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
 
 def get_commit_details(commit_hash: str) -> str:
-    """Reads commit details from artifacts/demo_logs.json only."""
-    path = os.path.join(ARTIFACTS_DIR, "demo_logs.json")
+    """Reads commit details from data/demo_logs.json only."""
+    path = os.path.join(DATA_DIR, "demo_logs.json")
     try:
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
